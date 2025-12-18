@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        
+        BitSet B1 = new BitSet(N);
+        BitSet B2 = new BitSet(N);
+        
+        // Array of BitSets to easily access B1 or B2 using index
+        BitSet[] bitsets = new BitSet[3];
+        bitsets[1] = B1;
+        bitsets[2] = B2;
+        
+        for (int i = 0; i < M; i++) {
+            String op = sc.next();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            
+            switch (op) {
+                case "AND":
+                    bitsets[x].and(bitsets[y]);
+                    break;
+                case "OR":
+                    bitsets[x].or(bitsets[y]);
+                    break;
+                case "XOR":
+                    bitsets[x].xor(bitsets[y]);
+                    break;
+                case "FLIP":
+                    bitsets[x].flip(y);
+                    break;
+                case "SET":
+                    bitsets[x].set(y);
+                    break;
+            }
+            // Print number of set bits (cardinality) for B1 and B2
+            System.out.println(B1.cardinality() + " " + B2.cardinality());
+        }
+        sc.close();
+    }
+}
